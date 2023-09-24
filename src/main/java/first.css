@@ -1,0 +1,116 @@
+/* styles.css */
+
+/* Grey color */
+.grey-color {
+    -fx-background-color: #808080;
+    -fx-text-fill: white;
+}
+
+/* Red color */
+.red-color {
+    -fx-background-color: #FF0000;
+    -fx-text-fill: white;
+}
+
+/* Green color */
+.green-color {
+    -fx-background-color: #00FF00;
+    -fx-text-fill: white;
+}
+
+/* Blue color */
+.blue-color {
+    -fx-background-color: #0000FF;
+    -fx-text-fill: white;
+}
+
+/* Yellow color */
+.yellow-color {
+    -fx-background-color: #FFFF00;
+    -fx-text-fill: black;
+}
+
+/* Orange color */
+.orange-color {
+    -fx-background-color: #FFA500;
+    -fx-text-fill: white;
+}
+
+/* Purple color */
+.purple-color {
+    -fx-background-color: #800080;
+    -fx-text-fill: white;
+}
+
+/* Pink color */
+.pink-color {
+    -fx-background-color: #FFC0CB;
+    -fx-text-fill: black;
+}
+/* styles.css */
+
+/* Grey colors */
+.light-grey {
+    -fx-background-color: #D3D3D3;
+    -fx-text-fill: black;
+}
+
+.medium-grey {
+    -fx-background-color: #808080;
+    -fx-text-fill: white;
+}
+
+.dark-grey {
+    -fx-background-color: #333333;
+    -fx-text-fill: white;
+}
+
+/* Red shades */
+light-red {
+    -fx-background-color: #FFC0CB;
+    -fx-text-fill: black;
+}
+
+medium-red {
+    -fx-background-color: #FF0000;
+    -fx-text-fill: white;
+}
+
+dark-red {
+    -fx-background-color: #8B0000;
+    -fx-text-fill: white;
+}
+
+/* Green shades */
+light-green {
+    -fx-background-color: #90EE90;
+    -fx-text-fill: black;
+}
+
+medium-green {
+    -fx-background-color: #008000;
+    -fx-text-fill: white;
+}
+
+dark-green {
+    -fx-background-color: #006400;
+    -fx-text-fill: white;
+}
+
+/* Blue shades */
+light-blue {
+    -fx-background-color: #ADD8E6;
+    -fx-text-fill: black;
+}
+
+medium-blue {
+    -fx-background-color: #0000FF;
+    -fx-text-fill: white;
+}
+
+dark-blue {
+    -fx-background-color: #00008B;
+    -fx-text-fill: white;
+}
+
+/* Add more color shades as needed */
