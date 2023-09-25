@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>ToDoList</artifactId>
+    <artifactId>JDesk</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>ToDoList</name>
 
@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.todolist/com.example.todolist.HelloApplication</mainClass>
+                            <mainClass>com.example.todolist/com.example.todolist.ProgramStart</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
