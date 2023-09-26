@@ -19,7 +19,7 @@ public class ProgramStart extends Application {
 
     public static void main(String[] args) {
         launch();
-        System.out.println("okay Boss");
+       // System.out.println("okay Boss");
     }
 }
 
