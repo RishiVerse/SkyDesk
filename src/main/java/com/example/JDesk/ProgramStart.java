@@ -1,4 +1,4 @@
-package com.example.todolist;
+package com.example.JDesk;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +10,9 @@ import java.io.IOException;
 public class ProgramStart extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("SkyUI.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("LogoUI.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1500, 900);
-       // stage.setTitle("Hello!");
+         stage.setTitle("JDesk");
         stage.setScene(scene);
         stage.show();
     }
