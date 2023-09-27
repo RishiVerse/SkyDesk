@@ -12,6 +12,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Objects;
+
 
 public class UIController {
 
@@ -35,6 +38,11 @@ public class UIController {
     private Button SignButton;
     @FXML
     private Label Logo;
+    @FXML
+    private TextField LoginUsernameField;
+    @FXML
+    private TextField LoginPasswordField;
+
 
 
 
@@ -61,6 +69,7 @@ public class UIController {
     {
         RegisterForm register= new RegisterForm();
         register.Register(NameField.getText(),EmailField.getText(),PasswordField.getText());
+        register.data(NameField.getText(),EmailField.getText(),PasswordField.getText());
         Stage stage=new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("SuccessMessageUI.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1500, 900);
@@ -79,7 +88,27 @@ public class UIController {
         stage.show();
 
     }
+@FXML
+    public void LogInButtonClicked()
+{
+    System.out.println(LoginUsernameField.getText()+" "+RegisterForm.userData.get(0)+" "+LoginPasswordField.getText()+" "+RegisterForm.userData.get(2));
+    if(Objects.equals(LoginUsernameField.getText(), RegisterForm.userData.get(0)) && Objects.equals(LoginPasswordField.getText(), RegisterForm.userData.get(2)))
+        System.out.println("Sign in successful");
+    else
+        System.out.println("sign in failed");
 
+
+
+}
+    @FXML
+    public void SignInButton(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load (getClass().getResource("LogInUI.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
 
 }

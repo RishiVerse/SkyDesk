@@ -22,6 +22,6 @@
             </TextField>
          </children>
       </VBox>
-      <Button layoutX="264.0" layoutY="227.0" mnemonicParsing="false" onAction="#LogInButtonClciked" prefHeight="26.0" prefWidth="82.0" text="Log In" />
+      <Button layoutX="264.0" layoutY="227.0" mnemonicParsing="false" onAction="#LogInButtonClicked" prefHeight="26.0" prefWidth="82.0" text="Log In" />
    </children>
 </AnchorPane>

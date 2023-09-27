@@ -23,6 +23,6 @@
          </children>
       </VBox>
       <Button fx:id="SignButton" layoutX="569.0" layoutY="518.0" mnemonicParsing="false" onAction="#SignClicked" opacity="0.78" prefHeight="26.0" prefWidth="217.0" text="Sign-In/Sing-Up" />
-      <Button layoutX="808.0" layoutY="519.0" mnemonicParsing="false" opacity="0.5" text="Already Having Account?" />
+      <Button layoutX="808.0" layoutY="519.0" mnemonicParsing="false" opacity="0.5" text="Already Having Account?" onAction="#SignInButton" />
    </children>
 </AnchorPane>
