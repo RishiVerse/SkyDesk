@@ -1,5 +1,6 @@
-package com.example.JDesk;
+package com.example.JDeskUI;
 
+import JDeskWorking.RegisterForm;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 
 public class UIController {
@@ -39,17 +38,29 @@ public class UIController {
 
 
 
-    @FXML
-public void SignClicked(ActionEvent event) throws Exception
-
+    @FXML    // When user clicks on Sign Button
+    public void SignClicked(ActionEvent event) throws Exception
     {
+//    {  Stage stage=new Stage();
+//        FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("RegisterUI.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 1500, 900);
+//        stage.setTitle("JDesk");
+//        stage.setScene(scene);
+//        stage.show();
+
+// The current scene becomes stage and other becomes scene
         Parent root = FXMLLoader.load (getClass().getResource("RegisterUI.fxml"));
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
 
-
+    }
+    @FXML  // When User wants to register it calls RegisterForm function
+    public void RegisterButton()
+    {
+        RegisterForm register= new RegisterForm();
+        register.Register(NameField.getText(),EmailField.getText(),PasswordField.getText());
     }
 
 

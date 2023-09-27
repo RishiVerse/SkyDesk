@@ -3,6 +3,6 @@ module com.example.todolist {
     requires javafx.fxml;
 
 
-    opens com.example.JDesk to javafx.fxml;
-    exports com.example.JDesk;
+    opens com.example.JDeskUI to javafx.fxml;
+    exports com.example.JDeskUI;
 }
