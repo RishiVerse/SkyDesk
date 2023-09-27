@@ -1,4 +1,4 @@
-package com.example.JDesk;
+package com.example.JDeskUI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
