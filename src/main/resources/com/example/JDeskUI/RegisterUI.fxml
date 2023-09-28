@@ -4,31 +4,53 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="728.0"
-            prefWidth="803.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.JDeskUI.UIController">
-   <HBox layoutX="88.0" layoutY="153.0" prefHeight="42.0" prefWidth="466.0">
-      <Label prefHeight="34.0" prefWidth="139.0" text="Name"/>
-      <TextField fx:id="NameField" prefHeight="35.0" prefWidth="266.0" promptText="Username"/>
-   </HBox>
-   <HBox layoutX="88.0" layoutY="199.0" prefHeight="42.0" prefWidth="412.0">
-      <Label prefHeight="41.0" prefWidth="141.0" text="Email"/>
-      <TextField fx:id="EmailField" prefHeight="39.0" prefWidth="265.0" promptText="Email Address"/>
-   </HBox>
-   <HBox layoutX="88.0" layoutY="251.0" prefHeight="50.0" prefWidth="406.0">
-      <Label prefHeight="44.0" prefWidth="143.0" text="Password"/>
-      <PasswordField fx:id="PasswordField" prefHeight="42.0" prefWidth="258.0"
-                     promptText="Password..Use all character"/>
-   </HBox>
-   <Label alignment="CENTER" layoutX="215.0" layoutY="51.0" prefHeight="50.0" prefWidth="171.0" text="Register">
-      <font>
-         <Font size="29.0"/>
-      </font>
-   </Label>
-   <Button layoutX="230.0" layoutY="357.0" mnemonicParsing="false" onAction="#RegisterButton" prefHeight="44.0"
-           prefWidth="140.0" text="Reghister"/>
-   <Button layoutX="386.0" layoutY="367.0" mnemonicParsing="false" opacity="0.39" text="Already Having Account?"/>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1033.0" prefWidth="1360.0" styleClass="grey-color" stylesheets="@../src/main/java/first.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.JDeskUI.UIController">
+   <children>
+      <HBox layoutX="88.0" layoutY="153.0" />
+      <HBox layoutX="88.0" layoutY="199.0" />
+      <HBox layoutX="88.0" layoutY="251.0" />
+      <Label alignment="CENTER" layoutX="1062.0" layoutY="29.0" prefHeight="67.0" prefWidth="162.0" text="Register">
+         <font>
+            <Font name="Al Bayan Plain" size="39.0" />
+         </font>
+      </Label>
+      <VBox layoutX="1062.0" layoutY="139.0" prefHeight="231.0" prefWidth="258.0">
+         <children>
+            <Label prefHeight="40.0" prefWidth="139.0" text="Name">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <TextField fx:id="NameField" prefHeight="24.0" prefWidth="200.0" promptText="Username" styleClass="light-grey" stylesheets="@../src/main/java/first.css" />
+            <Label prefHeight="39.0" prefWidth="141.0" text="Email">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <TextField fx:id="EmailField" prefHeight="28.0" prefWidth="200.0" promptText="Email Address" styleClass="light-grey" stylesheets="@../src/main/java/first.css" />
+            <Label prefHeight="40.0" prefWidth="143.0" text="Password">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="PasswordField" prefHeight="30.0" prefWidth="200.0" promptText="Password..Use all character" styleClass="light-grey" stylesheets="@../src/main/java/first.css" />
+         </children>
+      </VBox>
+      <HBox layoutX="1053.0" layoutY="429.0" prefHeight="35.0" prefWidth="277.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#RegisterButton" prefHeight="26.0" prefWidth="112.0" text="Register" />
+            <Button mnemonicParsing="false" opacity="0.39" prefHeight="26.0" prefWidth="162.0" text="Already Having Account?" />
+         </children>
+      </HBox>
+      <ImageView fitHeight="924.0" fitWidth="1031.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@/logo.png"/>
+      </ImageView>
+   </children>
 </AnchorPane>
