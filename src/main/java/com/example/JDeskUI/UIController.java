@@ -65,14 +65,19 @@ public class UIController {
 
     }
     @FXML  // When User wants to register it calls RegisterForm function
-    public void RegisterButton() throws Exception
+    public void RegisterButton(ActionEvent event) throws Exception
     {
         RegisterForm register= new RegisterForm();
        // register.Register(NameField.getText(),EmailField.getText(),PasswordField.getText());
         register.data(NameField.getText(),EmailField.getText(),PasswordField.getText());
-        Stage stage=new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("SuccessMessageUI.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1500, 900);
+       // Stage stage=new Stage();
+        Parent root = FXMLLoader.load (getClass().getResource("SuccessMessageUI.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+       // FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("SuccessMessageUI.fxml"));
+      //  Scene scene = new Scene(fxmlLoader.load(), 1500, 900);
         stage.setTitle("JDesk");
         stage.setScene(scene);
         stage.show();
