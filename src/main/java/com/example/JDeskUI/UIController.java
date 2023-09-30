@@ -94,12 +94,16 @@ public class UIController {
 
     }
 @FXML
-    public void LogInButtonClicked()
-{
+    public void LogInButtonClicked(ActionEvent event) throws IOException {
     System.out.println(LoginUsernameField.getText()+" "+RegisterForm.userData.get(0)+" "+LoginPasswordField.getText()+" "+RegisterForm.userData.get(2));
-    if(Objects.equals(LoginUsernameField.getText(), RegisterForm.userData.get(0)) && Objects.equals(LoginPasswordField.getText(), RegisterForm.userData.get(2)))
+    if(Objects.equals(LoginUsernameField.getText(), RegisterForm.userData.get(0)) && Objects.equals(LoginPasswordField.getText(), RegisterForm.userData.get(2))) {
         System.out.println("Sign in successful");
-    else
+        Parent root = FXMLLoader.load (getClass().getResource("LibraryViewUI.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }else
         System.out.println("sign in failed");
 
 
