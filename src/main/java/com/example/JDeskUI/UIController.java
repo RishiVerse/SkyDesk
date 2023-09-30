@@ -68,7 +68,7 @@ public class UIController {
     public void RegisterButton() throws Exception
     {
         RegisterForm register= new RegisterForm();
-        register.Register(NameField.getText(),EmailField.getText(),PasswordField.getText());
+       // register.Register(NameField.getText(),EmailField.getText(),PasswordField.getText());
         register.data(NameField.getText(),EmailField.getText(),PasswordField.getText());
         Stage stage=new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("SuccessMessageUI.fxml"));
