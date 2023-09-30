@@ -22,17 +22,6 @@ public class ProgramStart extends Application {
     }
 
     public static void main(String[] args) {
-
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/rishabhmaurya/Documents/UISkyDesk/userDetail.db");
-            Statement s = conn.createStatement();
-            s.execute("create table userDetail(name text,email text,password text)");
-            System.out.println("success");
-        }
-        catch (SQLException e)
-        {
-            System.out.println("something went wrong");
-        }
         launch();
     }
 }
