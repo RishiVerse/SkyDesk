@@ -14,11 +14,11 @@ public class RegisterForm {
     public static ArrayList  <String> userData=new ArrayList<>();
 
 
-    public void data(String name,String mail,String password)  {
+    public void data(String names,String mails,String passwords)  {
 
-        userData.add(name);
-        userData.add(mail);
-        userData.add(password);
+        userData.add(names);
+        userData.add(mails);
+        userData.add(passwords);
 
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/rishabhmaurya/Documents/SkyDesk/src/main/java/com/example/JDeskUI/userDetail.db");
@@ -26,7 +26,7 @@ public class RegisterForm {
             s.execute("create table if not exists " +
                     " userDetail(name text,email text,password text)");
             s.execute("insert  into  userDetail(name,email,password)"+
-                    " values(,'hello@.com',2334)");
+                    "VALUES('"+names+ "', " + mails + ", '" + passwords + "')");
             s.close();
             conn.close();
             System.out.println("success");
