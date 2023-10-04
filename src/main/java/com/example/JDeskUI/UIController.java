@@ -1,5 +1,6 @@
 package com.example.JDeskUI;
 
+import JDeskWorking.DatabaseMethods;
 import JDeskWorking.RegisterForm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -76,26 +77,42 @@ public class UIController {
         stage.setScene(scene);
         stage.show();
 
+
     }
     @FXML  // When User wants to register it calls RegisterForm function
     public void RegisterButton(ActionEvent event) throws Exception
     {
+
         RegisterForm register= new RegisterForm();
        // register.Register(NameField.getText(),EmailField.getText(),PasswordField.getText());
         register.data(NameField.getText(),EmailField.getText(),PasswordField.getText());
-       // Stage stage=new Stage();
-        Parent root = FXMLLoader.load (getClass().getResource("SuccessMessageUI.fxml"));
+if(!DatabaseMethods.searchCredentials()) {
+    if (DatabaseMethods.insertCredentials()) {
+        System.out.println("inserted data in table");
+        // Stage stage=new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("SuccessMessageUI.fxml"));
         Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-       // FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("SuccessMessageUI.fxml"));
-      //  Scene scene = new Scene(fxmlLoader.load(), 1500, 900);
+        // FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("SuccessMessageUI.fxml"));
+        //  Scene scene = new Scene(fxmlLoader.load(), 1500, 900);
         stage.setTitle("JDesk");
         stage.setScene(scene);
         stage.show();
 
     }
+}else
+            {
+                System.out.println("Insertion was unsuccessful");
+                NameField.clear();
+                PasswordField.clear();
+                EmailField.clear();
+        }}
+
+
+
+
     @FXML
     public void ContinueButton(ActionEvent event) throws Exception
     {
@@ -109,18 +126,21 @@ public class UIController {
 @FXML
     public void LogInButtonClicked(ActionEvent event) throws IOException {
     System.out.println(LoginUsernameField.getText()+" "+RegisterForm.userData.get(0)+" "+LoginPasswordField.getText()+" "+RegisterForm.userData.get(2));
-    if(Objects.equals(LoginUsernameField.getText(), RegisterForm.userData.get(0)) && Objects.equals(LoginPasswordField.getText(), RegisterForm.userData.get(2))) {
-        System.out.println("Sign in successful");
+  //  if(Objects.equals(LoginUsernameField.getText(), RegisterForm.userData.get(0)) && Objects.equals(LoginPasswordField.getText(), RegisterForm.userData.get(2))) {
 
-        Parent root = FXMLLoader.load (getClass().getResource("LibraryViewUI.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 
-        stage.setScene(scene);
-        stage.show();
+        DatabaseMethods d = new DatabaseMethods();
+        if (d.searchCredentials()) {
+            System.out.println("sign in successful");
+            Parent root = FXMLLoader.load(getClass().getResource("LibraryViewUI.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-    }else
-        System.out.println("sign in failed");
+            stage.setScene(scene);
+            stage.show();
+        } else
+            System.out.println("Sign in failed");
+
 
 }
 
