@@ -86,7 +86,7 @@ public class UIController {
         RegisterForm register= new RegisterForm();
        // register.Register(NameField.getText(),EmailField.getText(),PasswordField.getText());
         register.data(NameField.getText(),EmailField.getText(),PasswordField.getText());
-if(!DatabaseMethods.searchCredentials()) {
+    if(!DatabaseMethods.searchCredentials()) {
     if (DatabaseMethods.insertCredentials()) {
         System.out.println("inserted data in table");
         // Stage stage=new Stage();
@@ -104,7 +104,7 @@ if(!DatabaseMethods.searchCredentials()) {
     }
 }else
             {
-                System.out.println("Insertion was unsuccessful");
+                System.out.println("credentials already there");
                 NameField.clear();
                 PasswordField.clear();
                 EmailField.clear();
