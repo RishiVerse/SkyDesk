@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class DatabaseMethods {
 
-    public static boolean searchCredentials() {
-        String users = RegisterForm.userData.get(0);
-        String pwds = RegisterForm.userData.get(2); // Assuming the password is in the third column
+    public static boolean searchCredentials(String u,String p) {
+//        String users = RegisterForm.userData.get(0);
+//        String pwds = RegisterForm.userData.get(2); // Assuming the password is in the third column
         boolean flag = false;
 
         try {
@@ -18,8 +18,8 @@ public class DatabaseMethods {
             while (r.next()) {
                 String name = r.getString("name");
                 String password = r.getString("password");
-                System.out.println(name+"  "+password);
-                if (name != null && password != null && name.equals(users) && password.equals(pwds)) {
+              //  System.out.println(name+"  "+password);
+                if (name != null && password != null && name.equals(u) && password.equals(p)) {
                     flag = true;
                     break; // No need to continue searching, we found a match
                 }
@@ -49,7 +49,7 @@ public class DatabaseMethods {
             preparedStatement.close();
             conn.close();
 
-            System.out.println("insertion successful"+RegisterForm.userData.get(0)+" "+RegisterForm.userData.get(1)+" "+RegisterForm.userData.get(2));
+           // System.out.println("insertion successful"+RegisterForm.userData.get(0)+" "+RegisterForm.userData.get(1)+" "+RegisterForm.userData.get(2));
             return true;
         }
         catch (SQLException e)
