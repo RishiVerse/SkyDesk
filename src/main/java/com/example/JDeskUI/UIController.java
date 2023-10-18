@@ -86,7 +86,7 @@ public class UIController {
         RegisterForm register= new RegisterForm();
        // register.Register(NameField.getText(),EmailField.getText(),PasswordField.getText());
         register.data(NameField.getText(),EmailField.getText(),PasswordField.getText());
-if(!DatabaseMethods.searchCredentials()) {
+    if(!DatabaseMethods.searchCredentials(RegisterForm.userData.get(0),RegisterForm.userData.get(1))) {
     if (DatabaseMethods.insertCredentials()) {
         System.out.println("inserted data in table");
         // Stage stage=new Stage();
@@ -104,7 +104,7 @@ if(!DatabaseMethods.searchCredentials()) {
     }
 }else
             {
-                System.out.println("Insertion was unsuccessful");
+                System.out.println("credentials already there");
                 NameField.clear();
                 PasswordField.clear();
                 EmailField.clear();
@@ -125,21 +125,25 @@ if(!DatabaseMethods.searchCredentials()) {
     }
 @FXML
     public void LogInButtonClicked(ActionEvent event) throws IOException {
-    System.out.println(LoginUsernameField.getText()+" "+RegisterForm.userData.get(0)+" "+LoginPasswordField.getText()+" "+RegisterForm.userData.get(2));
-  //  if(Objects.equals(LoginUsernameField.getText(), RegisterForm.userData.get(0)) && Objects.equals(LoginPasswordField.getText(), RegisterForm.userData.get(2))) {
+//    System.out.println(LoginUsernameField.getText()+" "+RegisterForm.userData.get(0)+" "+LoginPasswordField.getText()+" "+RegisterForm.userData.get(2));
+//    if(Objects.equals(LoginUsernameField.getText(), RegisterForm.userData.get(0)) && Objects.equals(LoginPasswordField.getText(), RegisterForm.userData.get(2))) {
 
+try {
 
-        DatabaseMethods d = new DatabaseMethods();
-        if (d.searchCredentials()) {
-            System.out.println("sign in successful");
-            Parent root = FXMLLoader.load(getClass().getResource("LibraryViewUI.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            stage.setScene(scene);
-            stage.show();
-        } else
-            System.out.println("Sign in failed");
+    if (DatabaseMethods.searchCredentials(LoginUsernameField.getText(), LoginPasswordField.getText())) {
+        System.out.println(LoginPasswordField+"  "+LoginUsernameField);
+        System.out.println("sign in successful");
+        Parent root = FXMLLoader.load(getClass().getResource("LibraryViewUI.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+}
+            catch (Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
 
 
 }
