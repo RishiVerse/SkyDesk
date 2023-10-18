@@ -18,7 +18,7 @@ public class DatabaseMethods {
             while (r.next()) {
                 String name = r.getString("name");
                 String password = r.getString("password");
-              //  System.out.println(name+"  "+password);
+               System.out.println(name+"  "+password);
                 if (name != null && password != null && name.equals(u) && password.equals(p)) {
                     flag = true;
                     break; // No need to continue searching, we found a match
