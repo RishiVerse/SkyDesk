@@ -12,7 +12,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -52,13 +55,20 @@ public class UIController {
     private ListView<String> RecentList;
     @FXML
     private ToggleButton libraryid;
+    @FXML
+    private WebView webViewScene;
 
    // ObservableList<String> list= FXCollections.observableArrayList("Item 1", "Item 2", "Item 3");
 
     private ObservableList<String> items = FXCollections.observableArrayList("item1","item2");
 
 
-
+//    public void initialize(URL location, ResourceBundle resources) {
+//        WebEngine webEngine = webViewScene.getEngine();
+//
+//        // Load a PDF file using WebView
+//        webEngine.load(getClass().getResource("src/main/java/com/example/JDeskUI/leph1an.pdf").toExternalForm());
+//    }
 
     @FXML    // When user clicks on Sign Button
     public void SignClicked(ActionEvent event) throws Exception
@@ -162,14 +172,35 @@ try {
     }
 
     @FXML
-    public void LibraryClicked()
-    {
-        libraryid.setSelected(false);
-        RecentList.getItems().addAll(items);
+    public void LibraryClicked(ActionEvent event) throws IOException {
+//        libraryid.setSelected(false);
+//        RecentList.getItems().addAll(items);
 
+
+        Parent root = FXMLLoader.load (getClass().getResource("PDFView.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
+    public void TestClicked()
+    {
+
+        URL pdfUrl = getClass().getResource("jetbrains://idea/navigate/reference?project=SkyDesk&path=testfile.pdf");
+        WebEngine webEngine = webViewScene.getEngine();
+        System.out.println("PDF URL: " + pdfUrl);
+        webEngine.load(pdfUrl.toExternalForm());
+
+
+
+        // Load a PDF file using WebView
+        webEngine.load(getClass().getResource("").toExternalForm());
+    }
 
     }
 
 
 
-}
