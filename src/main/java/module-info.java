@@ -7,5 +7,7 @@ module com.example.todolist {
 
     opens com.example.JDeskUI to javafx.fxml;
     exports com.example.JDeskUI;
+    opens JDeskWorking to javafx.base;
+
 
 }

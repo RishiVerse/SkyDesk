@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 
-public class UIController {
+public class UIController  {
 
     @FXML
     private TextField NameField;
@@ -96,7 +96,8 @@ public class UIController {
         RegisterForm register= new RegisterForm();
        // register.Register(NameField.getText(),EmailField.getText(),PasswordField.getText());
         register.data(NameField.getText(),EmailField.getText(),PasswordField.getText());
-    if(!DatabaseMethods.searchCredentials(RegisterForm.userData.get(0),RegisterForm.userData.get(1))) {
+
+    if(!DatabaseMethods.searchCredentials(RegisterForm.userData.get(0),RegisterForm.userData.get(1)) && NameField.getText().length()>=4 && PasswordField.getText().length()>=8) {
     if (DatabaseMethods.insertCredentials()) {
         System.out.println("inserted data in table");
         // Stage stage=new Stage();
@@ -171,33 +172,18 @@ try {
 
     }
 
-    @FXML
-    public void LibraryClicked(ActionEvent event) throws IOException {
-//        libraryid.setSelected(false);
-//        RecentList.getItems().addAll(items);
 
-
-        Parent root = FXMLLoader.load (getClass().getResource("PDFView.fxml"));
-        Scene scene = new Scene(root);
-        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-
-    }
 
     @FXML
     public void TestClicked()
     {
 
-        URL pdfUrl = getClass().getResource("jetbrains://idea/navigate/reference?project=SkyDesk&path=testfile.pdf");
+
+       // WebView webView = new WebView();
         WebEngine webEngine = webViewScene.getEngine();
+        String pdfUrl = ":/Users/rishabhmaurya/Documents/SkyDesk/src/main/resources/testfile.pdf";
         System.out.println("PDF URL: " + pdfUrl);
-        webEngine.load(pdfUrl.toExternalForm());
-
-
-
-        // Load a PDF file using WebView
-        webEngine.load(getClass().getResource("").toExternalForm());
+        webEngine.load(pdfUrl);
     }
 
     }
