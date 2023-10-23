@@ -22,6 +22,8 @@ public class ProgramStart extends Application {
     }
 
     public static void main(String[] args) {
+        InsertPDFIntoSQLite t=new InsertPDFIntoSQLite();
+        t.test();
         launch();
     }
 }
