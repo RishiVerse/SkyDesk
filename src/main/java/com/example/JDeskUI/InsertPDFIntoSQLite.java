@@ -14,7 +14,7 @@ public class InsertPDFIntoSQLite {
 
         public void test() {
             String databaseURL = "jdbc:sqlite:src/main/java/com/example/JDeskUI/userDetail.db";
-            String pdfFilePath = "src/main/java/com/example/JDeskUI/leph1an.pdf"; // Replace with the path to your PDF file
+            String pdfFilePath = "src/main/resources/testfile.pdf"; // Replace with the path to your PDF file
 
             try {
                 // Load the SQLite JDBC driver
