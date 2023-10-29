@@ -22,6 +22,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -41,7 +42,7 @@ public class LibraryViewController implements Initializable {
     @FXML
     private WebView webview;
     @FXML
-    private ImageView mypane;
+    private ImageView pdffile;
 
     ObservableList<User> lst = FXCollections.observableArrayList(new User("rich dad poor dad", "robert", "today")
             , new User("rich dad poor dad", "robert", "today"));
@@ -80,42 +81,52 @@ public class LibraryViewController implements Initializable {
     @FXML
     public void LibraryClicked(ActionEvent event) throws IOException, InterruptedException {
 
-        Stage stage = new Stage();
-        BorderPane root = new BorderPane();
-        Scene scene = new Scene(root, 600, 400);
-        stage.setScene(scene);
-        stage.show();
-        WebView webview = new WebView();
-        BorderPane.setMargin(webview, new Insets(10));
-        root.setCenter(webview);
+       
         WebEngine webengine = webview.getEngine();
         webengine.load("https://www.google.com");
 
     }
 
+
     @FXML
     public void OpenDocument(ActionEvent event) throws SQLException, IOException {
         User u = TableScene.getSelectionModel().getSelectedItem();
-        ResultSet r = DatabaseMethods.openDB("select * from pdf_documents where filename='" + u.getTitle() + "'", "open");
-        String s = r.getString("filename");
-        System.out.println(s);
-//        String fxml = "ImageView.fxml";
-//        FXMLLoader loader = FXMLLoader.load(getClass().getResource(fxml));
-//        Parent root = loader.load(); // Load the FXML file and obtain the root node.
-//
-//// Create a new scene using the root node.
-//        Scene scene = new Scene(root);
-//
-//// Get the primary stage and set the scene to display it.
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stage.setScene(scene);
-//        stage.show();
 
+        // Establish a database connection
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/rishabhmaurya/Documents/SkyDesk/src/main/java/com/example/JDeskUI/userDetail.db");
+        Statement s = conn.createStatement();
 
-//        Blob b = r.getBlob("pdf_data");
-//        InputStream is = b.getBinaryStream();
-//        Image image = new Image(is);
-//        mypane.setImage(image);
-//        DatabaseMethods.openDB(null, "close");
+        // Execute the SQL query to retrieve the image data
+        ResultSet resultSet = s.executeQuery("SELECT pdf_data FROM pdf_documents WHERE filename = '" + u.getTitle() + "'");
+
+        if (resultSet.next()) {
+            // Get the image data from the result set
+            byte[] imageData = resultSet.getBytes("pdf_data");
+            InputStream imageStream = new ByteArrayInputStream(imageData);
+
+            // Create an Image object from the image data
+            Image image = new Image(imageStream);
+
+            // Load the new FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("LibraryViewUI.fxml"));
+            Parent root = loader.load();
+
+            // Access the ImageView in the new scene and set the image
+            //ImageView pdffiles = (ImageView) root.lookup("pdffile"); // Replace with the correct ID
+            pdffile.setImage(image);
+
+            // Create a new stage and set the scene
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+
+            // Show the new stage
+            stage.show();
+        }
+
+        // Close resources
+
+        s.close();
+        conn.close();
     }
+
 }
