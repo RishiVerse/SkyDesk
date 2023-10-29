@@ -1,32 +1,47 @@
 package JDeskWorking;
 
 import java.sql.*;
+import java.util.Objects;
 
 public class DatabaseMethods {
 
-    public static boolean searchCredentials(String u,String p) {
-//        String users = RegisterForm.userData.get(0);
-//        String pwds = RegisterForm.userData.get(2); // Assuming the password is in the third column
+    public static Connection conn;
+    public static Statement s;
+
+    public static ResultSet openDB(String query, String flag) throws SQLException {
+        if (Objects.equals(flag, "open")) {
+            conn = DriverManager.getConnection("jdbc:sqlite:/Users/rishabhmaurya/Documents/SkyDesk/src/main/java/com/example/JDeskUI/userDetail.db");
+            s = conn.createStatement();
+            s.execute(query);
+            return s.getResultSet();
+        } else {
+            s.close();
+            conn.close();
+            return null;
+        }
+    }
+
+
+    public static boolean searchCredentials(String u) {
+
         boolean flag = false;
 
         try {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/rishabhmaurya/Documents/SkyDesk/src/main/java/com/example/JDeskUI/userDetail.db");
-            Statement s = conn.createStatement();
-            s.execute("select * from userDetail");
-            ResultSet r = s.getResultSet();
+            ResultSet r = openDB("select * from userDetail", "open");
 
-            while (r.next()) {
+            while (true) {
+                assert r != null;
+                if (!r.next()) break;
                 String name = r.getString("name");
-                String password = r.getString("password");
-               System.out.println(name+"  "+password);
-                if (name != null && password != null && name.equals(u) && password.equals(p)) {
+                //String password = r.getString("password");
+                // System.out.println(name + "  " + password);
+                if (name != null && name.equals(u)) {
                     flag = true;
                     break; // No need to continue searching, we found a match
                 }
             }
 
-            s.close();
-            conn.close();
+            openDB(null, "close");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -35,31 +50,22 @@ public class DatabaseMethods {
     }
 
 
-    public static boolean insertCredentials()
-    {
+    public static boolean insertCredentials(String NameField, String EmailField, String PasswordField) {
         try {
             Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/rishabhmaurya/Documents/SkyDesk/src/main/java/com/example/JDeskUI/userDetail.db");
-            PreparedStatement preparedStatement= conn.prepareStatement("insert  into  userDetail(name,email,password)"+
+            PreparedStatement preparedStatement = conn.prepareStatement("insert  into  userDetail(name,email,password)" +
                     " values(?,?,?)");
 
-            preparedStatement.setString(1, RegisterForm.userData.get(0)); // Replace with the actual name
-            preparedStatement.setString(2, RegisterForm.userData.get(1)); // Replace with the actual email
-            preparedStatement.setString(3, RegisterForm.userData.get(2)); // Replace with the actual password
-            preparedStatement.execute();
-            preparedStatement.close();
-            conn.close();
-
-           // System.out.println("insertion successful"+RegisterForm.userData.get(0)+" "+RegisterForm.userData.get(1)+" "+RegisterForm.userData.get(2));
+            preparedStatement.setString(1, NameField); // Replace with the actual name
+            preparedStatement.setString(2, EmailField); // Replace with the actual email
+            preparedStatement.setString(3, PasswordField); // Replace with the actual password
+            openDB(null, "close");
             return true;
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         return false;
     }
-
-
 
 
 }

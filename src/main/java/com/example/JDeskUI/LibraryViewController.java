@@ -1,5 +1,6 @@
 package com.example.JDeskUI;
 
+import JDeskWorking.DatabaseMethods;
 import JDeskWorking.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,74 +25,69 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class LibraryViewController {
+public class LibraryViewController implements Initializable {
 
     @FXML
     private TableView<User> TableScene;
     @FXML
-    private TableColumn<User,String> TitleColumn;
+    private TableColumn<User, String> TitleColumn;
     @FXML
-    private TableColumn<User,String> AuthorColumn;
+    private TableColumn<User, String> AuthorColumn;
     @FXML
-    private TableColumn<User,String> RecentColumn;
+    private TableColumn<User, String> RecentColumn;
     @FXML
     private WebView webview;
 
-    ObservableList<User> lst= FXCollections.observableArrayList(new User("rich dad poor dad","robert","today")
-    ,new User("rich dad poor dad","robert","today"));
+    ObservableList<User> lst = FXCollections.observableArrayList(new User("rich dad poor dad", "robert", "today")
+            , new User("rich dad poor dad", "robert", "today"));
 
 
-//@Override
-//    public void initialize(URL url, ResourceBundle resourceBundle) {
-//
-//
-//    try {
-//        Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/rishabhmaurya/Documents/SkyDesk/src/main/java/com/example/JDeskUI/userDetail.db");
-//        Statement s = conn.createStatement();
-//        s.execute("select * from pdf_documents");
-//        ResultSet r = s.getResultSet();
-//
-//        while (r.next()) {
-//            String name1 = r.getString("filename");
-//            String name2 = r.getString("filename");
-//            String password = r.getString("description");
-//            User newUser = new User(name1,name2,password);
-//            lst.add(newUser);
-//
-//
-//            System.out.println(name1+"  "+name2+"  "+password);
-//
-//        }
-//
-//        s.close();
-//        conn.close();
-//    } catch (SQLException e) {
-//        System.out.println(e.getMessage());
-//    }
-//    TitleColumn.setCellValueFactory(new PropertyValueFactory<User,String>("title"));
-//    AuthorColumn.setCellValueFactory(new PropertyValueFactory<User,String>("author"));
-//    RecentColumn.setCellValueFactory(new PropertyValueFactory<User,String>("recent"));
-//    TableScene.setItems(lst);
-//
-//    }
-
-    @FXML
-    public void LibraryClicked(ActionEvent event)  throws IOException, InterruptedException {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
+        try {
+            ResultSet r = DatabaseMethods.openDB("select * from pdf_documents", "open");
 
-        Stage stage=new Stage();
-        BorderPane root = new BorderPane();
-        Scene scene= new Scene(root,600,400);
-        stage.setScene(scene);
-        stage.show();
-        WebView webview=new WebView();
-        BorderPane.setMargin(webview,new Insets(10));
-        root.setCenter(webview);
-        WebEngine webengine= webview.getEngine();
-        webengine.load("src/main/resources/testfile.pdf");
+            while (r.next()) {
+                String name1 = r.getString("filename");
+                String name2 = r.getString("filename");
+                String password = r.getString("description");
+                User newUser = new User(name1, name2, password);
+                lst.add(newUser);
+
+
+                System.out.println(name1 + "  " + name2 + "  " + password);
+
+            }
+            DatabaseMethods.openDB(null, "close");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        TitleColumn.setCellValueFactory(new PropertyValueFactory<User, String>("title"));
+        AuthorColumn.setCellValueFactory(new PropertyValueFactory<User, String>("author"));
+        RecentColumn.setCellValueFactory(new PropertyValueFactory<User, String>("recent"));
+        TableScene.setItems(lst);
+
 
     }
 
+    @FXML
+    public void LibraryClicked(ActionEvent event) throws IOException, InterruptedException {
+
+        Stage stage = new Stage();
+        BorderPane root = new BorderPane();
+        Scene scene = new Scene(root, 600, 400);
+        stage.setScene(scene);
+        stage.show();
+        WebView webview = new WebView();
+        BorderPane.setMargin(webview, new Insets(10));
+        root.setCenter(webview);
+        WebEngine webengine = webview.getEngine();
+        webengine.load("https://www.google.com");
+        User u = TableScene.getSelectionModel().getSelectedItem();
+        System.out.println(u.getTitle() + " " + u.getAuthor());
+    }
 
 }
