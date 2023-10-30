@@ -6,26 +6,29 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
+
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
+
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.sql.*;
 import java.util.ResourceBundle;
 
@@ -42,7 +45,7 @@ public class LibraryViewController implements Initializable {
     @FXML
     private WebView webview;
     @FXML
-    private ImageView pdffile;
+    private TextArea textarea;
 
     ObservableList<User> lst = FXCollections.observableArrayList(new User("rich dad poor dad", "robert", "today")
             , new User("rich dad poor dad", "robert", "today"));
@@ -76,57 +79,55 @@ public class LibraryViewController implements Initializable {
         TableScene.setItems(lst);
 
 
+        User u = TableScene.getSelectionModel().getSelectedItem();
+
     }
 
     @FXML
     public void LibraryClicked(ActionEvent event) throws IOException, InterruptedException {
 
-       
+        webview.setVisible(true);
+        textarea.setVisible(false);
         WebEngine webengine = webview.getEngine();
         webengine.load("https://www.google.com");
 
     }
 
-
     @FXML
     public void OpenDocument(ActionEvent event) throws SQLException, IOException {
+        webview.setVisible(false);
+        textarea.setVisible(true);
+
+
         User u = TableScene.getSelectionModel().getSelectedItem();
 
-        // Establish a database connection
+        // Establish a database connection and retrieve the PDF data
         Connection conn = DriverManager.getConnection("jdbc:sqlite:/Users/rishabhmaurya/Documents/SkyDesk/src/main/java/com/example/JDeskUI/userDetail.db");
         Statement s = conn.createStatement();
-
-        // Execute the SQL query to retrieve the image data
         ResultSet resultSet = s.executeQuery("SELECT pdf_data FROM pdf_documents WHERE filename = '" + u.getTitle() + "'");
 
         if (resultSet.next()) {
-            // Get the image data from the result set
-            byte[] imageData = resultSet.getBytes("pdf_data");
-            InputStream imageStream = new ByteArrayInputStream(imageData);
+            byte[] pdfData = resultSet.getBytes("pdf_data");
 
-            // Create an Image object from the image data
-            Image image = new Image(imageStream);
+            // Extract text from the PDF data
+            String text = extractTextFromPdf(pdfData);
 
-            // Load the new FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("LibraryViewUI.fxml"));
-            Parent root = loader.load();
+            // Display the extracted text in the TextArea
+            // copypdffile.setText(text);
+            System.out.println(text);
+            textarea.setText(text);
 
-            // Access the ImageView in the new scene and set the image
-            //ImageView pdffiles = (ImageView) root.lookup("pdffile"); // Replace with the correct ID
-            pdffile.setImage(image);
 
-            // Create a new stage and set the scene
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-
-            // Show the new stage
-            stage.show();
+        } else {
+            System.out.println("Error in input data");
         }
-
-        // Close resources
-
-        s.close();
-        conn.close();
     }
 
+
+    private String extractTextFromPdf(byte[] pdfData) throws IOException {
+        try (PDDocument document = PDDocument.load(new ByteArrayInputStream(pdfData))) {
+            PDFTextStripper stripper = new PDFTextStripper();
+            return stripper.getText(document);
+        }
+    }
 }
