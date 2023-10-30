@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="969.0" styleClass="grey-color" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.JDeskUI.LibraryViewController">
-   <children>
-      <VBox layoutX="14.0" layoutY="14.0" prefHeight="622.0" prefWidth="171.0" styleClass="light-grey">
-         <children>
-            <Label prefHeight="44.0" prefWidth="187.0" text="JDesk">
-               <font>
-                  <Font size="23.0" />
-               </font>
-            </Label>
-            <ToggleButton fx:id="libraryid" mnemonicParsing="false" onAction="#LibraryClicked" prefHeight="55.0" prefWidth="171.0" text="Library">
-               <font>
-                  <Font size="25.0" />
-               </font>
-            </ToggleButton>
-         </children>
-      </VBox>
-      <TableView fx:id="TableScene" layoutX="203.0" layoutY="57.0" prefHeight="752.0" prefWidth="754.0">
-        <columns>
-          <TableColumn fx:id="TitleColumn" prefWidth="248.0" text="Title" />
-          <TableColumn fx:id="AuthorColumn" prefWidth="251.0" text="Author" />
-            <TableColumn fx:id="RecentColumn" prefWidth="249.0" text="Recent" />
-        </columns>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </TableView>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0"
+            prefWidth="1433.0" styleClass="grey-color" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.JDeskUI.LibraryViewController">
+    <children>
+        <VBox layoutX="14.0" layoutY="14.0" prefHeight="39.0" prefWidth="171.0" styleClass="light-grey"/>
+        <TableView fx:id="TableScene" layoutX="2.0" layoutY="57.0" prefHeight="752.0" prefWidth="698.0">
+            <columns>
+                <TableColumn fx:id="TitleColumn" prefWidth="248.0" text="Title"/>
+                <TableColumn fx:id="AuthorColumn" prefWidth="262.0" text="Author"/>
+                <TableColumn fx:id="RecentColumn" prefWidth="187.0" text="Recent"/>
+            </columns>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+        </TableView>
+        <ToggleButton fx:id="libraryid" layoutX="386.0" layoutY="10.0" mnemonicParsing="false"
+                      onAction="#LibraryClicked" prefHeight="35.0" prefWidth="134.0" text=" Your Web"
+                      textFill="#000000a9">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </ToggleButton>
+        <Button layoutX="536.0" layoutY="10.0" mnemonicParsing="false" onAction="#OpenDocument" prefHeight="35.0"
+                prefWidth="140.0" text="OPEN"/>
+        <Label layoutX="14.0" layoutY="14.0" prefHeight="39.0" prefWidth="238.0" text="Welcome to JDesk">
+            <font>
+                <Font size="23.0"/>
+            </font>
+        </Label>
+        <ScrollPane layoutX="715.0" layoutY="57.0" prefHeight="752.0" prefWidth="681.0">
+            <content>
+                <WebView fx:id="webview" prefHeight="746.0" prefWidth="673.0"/>
+            </content>
+        </ScrollPane>
+        <TextArea fx:id="textarea" layoutX="717.0" layoutY="60.0" prefHeight="742.0" prefWidth="666.0"/>
+    </children>
 </AnchorPane>
