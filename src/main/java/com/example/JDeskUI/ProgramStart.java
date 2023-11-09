@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,14 +17,14 @@ public class ProgramStart extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ProgramStart.class.getResource("LogoUI.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1500, 900);
-         stage.setTitle("JDesk");
+        stage.setTitle("JDesk");
         stage.setScene(scene);
         stage.show();
     }
 
     public static void main(String[] args) {
-        InsertPDFIntoSQLite t=new InsertPDFIntoSQLite();
-        t.test();
+        InsertPDFIntoSQLite t = new InsertPDFIntoSQLite();
+        // t.test();
         launch();
     }
 }

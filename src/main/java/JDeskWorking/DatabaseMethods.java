@@ -59,7 +59,9 @@ public class DatabaseMethods {
             preparedStatement.setString(1, NameField); // Replace with the actual name
             preparedStatement.setString(2, EmailField); // Replace with the actual email
             preparedStatement.setString(3, PasswordField); // Replace with the actual password
-            openDB(null, "close");
+            preparedStatement.execute();
+            preparedStatement.close();
+            conn.close();
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());

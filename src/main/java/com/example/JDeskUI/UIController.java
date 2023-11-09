@@ -95,7 +95,7 @@ public class UIController {
         try {
 
             if (DatabaseMethods.searchCredentials(LoginUsernameField.getText())) {
-                System.out.println("sign in successful");
+                System.out.println("sign in successful" + LoginUsernameField);
                 String fxml = "LibraryViewUI.fxml";
                 sceneSetting(event, fxml);
             }
